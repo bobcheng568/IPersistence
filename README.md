@@ -6,7 +6,7 @@
 
 Q1、Mybatis动态sql是做什么的？都有哪些动态sql？简述一下动态sql的执行原理？
 
-A1：Mybatis常用的动态sql标签有：<if>、<where>、<foreach>、<when>等等。动态sql标签可以完成逻辑判断并动态地拼接sql。基本原理是通过OGNL表达式从参数对象中取值，并根据表达式做逻辑判断，根据判断结果来拼接sql。
+A1：Mybatis常用的动态sql标签有：if、where、foreach、when等等。动态sql标签可以完成逻辑判断并动态地拼接sql。基本原理是通过OGNL表达式从参数对象中取值，并根据表达式做逻辑判断，根据判断结果来拼接sql。
 
 
 
