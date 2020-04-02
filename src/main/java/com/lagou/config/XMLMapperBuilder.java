@@ -25,22 +25,25 @@ public class XMLMapperBuilder {
 
         String namespace = rootElement.attributeValue("namespace");
 
-        List<Element> list = rootElement.selectNodes("//select");
-        for (Element element : list) {
-            String id = element.attributeValue("id");
-            String resultType = element.attributeValue("resultType");
-            String paramterType = element.attributeValue("paramterType");
-            String sqlText = element.getTextTrim();
-            MappedStatement mappedStatement = new MappedStatement();
-            mappedStatement.setId(id);
-            mappedStatement.setResultType(resultType);
-            mappedStatement.setParamterType(paramterType);
-            mappedStatement.setSql(sqlText);
-            String key = namespace+"."+id;
-            configuration.getMappedStatementMap().put(key,mappedStatement);
+        rootElement.selectNodes("//select").forEach(element -> packageMappedStatement(namespace, (Element) element));
+        rootElement.selectNodes("//insert").forEach(element -> packageMappedStatement(namespace, (Element) element));
+        rootElement.selectNodes("//update").forEach(element -> packageMappedStatement(namespace, (Element) element));
+        rootElement.selectNodes("//delete").forEach(element -> packageMappedStatement(namespace, (Element) element));
 
-        }
+    }
 
+    private void packageMappedStatement(String namespace, Element element) {
+        String id = element.attributeValue("id");
+        String resultType = element.attributeValue("resultType");
+        String paramterType = element.attributeValue("paramterType");
+        String sqlText = element.getTextTrim();
+        MappedStatement mappedStatement = new MappedStatement();
+        mappedStatement.setId(id);
+        mappedStatement.setResultType(resultType);
+        mappedStatement.setParamterType(paramterType);
+        mappedStatement.setSql(sqlText);
+        String key = namespace + "." + id;
+        configuration.getMappedStatementMap().put(key, mappedStatement);
     }
 
 
